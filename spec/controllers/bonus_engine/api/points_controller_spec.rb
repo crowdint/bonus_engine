@@ -5,7 +5,7 @@ describe BonusEngine::Api::PointsController do
   let!(:cycle) { create :cycle }
   let!(:event) { create(:event, name: 'test') }
   let!(:givencio) { create(:user, name: 'Givencio') }
-  let!(:giver) { create :bonus_engine_cycle_user }
+  let!(:giver) { create :bonus_engine_user }
   let!(:receiver) { create(:user, name: 'Recibencio') }
   let(:create_params){
     {

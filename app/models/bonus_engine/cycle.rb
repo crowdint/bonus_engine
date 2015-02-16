@@ -3,7 +3,6 @@ module BonusEngine
     validates_presence_of :name
 
     has_many :events
-    has_many :cycle_users, class_name: "::BonusEngine::CycleUser"
-    has_many :users, through: :cycle_users
+    has_and_belongs_to_many :bonus_engine_users
   end
 end

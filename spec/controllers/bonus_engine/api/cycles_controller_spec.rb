@@ -2,11 +2,18 @@ require 'rails_helper'
 
 describe BonusEngine::Api::CyclesController do
   render_views
+  let!(:user){ create :bonus_engine_user }
+
+  before do
+    set_current_user user
+  end
+
   describe "#index" do
     let!(:cycle) { create(:cycle, name: 'test') }
     let(:expected_response) { [{"name" => 'test'}] }
 
     before do
+      cycle.bonus_engine_users << user
       get :index
     end
 
