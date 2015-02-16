@@ -18,18 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 4.0.0"
   s.add_dependency "rabl"
-  s.add_dependency 'es5-shim-rails'
-  # Rails Assets
-  s.add_dependency "rails-assets-angular"
-  s.add_dependency "rails-assets-angular-animate"
-  s.add_dependency "rails-assets-angular-aria"
-  s.add_dependency "rails-assets-angular-material", "0.7.0.rc3"
-  s.add_dependency "rails-assets-angular-ui-router"
-  s.add_dependency "rails-assets-hammer.js"
-  s.add_dependency "rails-assets-react"
-  s.add_dependency "rails-assets-iwano--ng-loading", "0.0.7"
-  s.add_dependency "rails-assets-lodash"
-  s.add_dependency "rails-assets-restangular", ">= 1.3.4"
+  s.add_dependency 'angularjs-rails'
+  s.add_dependency 'angular-rails-templates'
+
 
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "factory_girl_rails"
