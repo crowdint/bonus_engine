@@ -71,6 +71,18 @@ describe BonusEngine::Api::PointsController do
       end
     end
 
+    context 'user should respect minimum money limit' do
+      before do
+        event.update_attribute :minimum_points, 100
+        create_params[:quantity] = 99
+        post :create, create_params
+      end
+
+      it 'wont create point under the minimum limit' do
+        expect(response.status).to be 422
+      end
+    end
+
     context 'when message is mandatory' do
       before do
         event.update_attribute :msg_required, true
