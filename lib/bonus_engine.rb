@@ -5,6 +5,8 @@ require "services/authorization_service"
 require "services/budget_service"
 require 'angularjs-rails'
 require 'angular-rails-templates'
+require 'ng-rails-csrf'
+require 'angular-ui-bootstrap-rails'
 
 
 module BonusEngine

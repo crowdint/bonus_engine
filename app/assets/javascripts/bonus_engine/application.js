@@ -16,8 +16,10 @@
 //= require angular-resource
 //= require angular-cookies
 //= require angular-rails-templates
-//= require bonus_engine/app/main
-//= require_tree ./app/templates
-//= require_tree ./app/resources
-//= require_tree ./app/controllers
+//= require angular-ui-bootstrap-tpls
+//= require ng-rails-csrf
+//= require ./admin/main
+//= require_tree ./admin
+//= require ./app/main
+//= require_tree ./app
 //= require_tree .

@@ -1,9 +1,4 @@
 BonusEngine::Engine.routes.draw do
-
-  root to: "home#index"
-
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-
   namespace :api do
     namespace :admin do
       resources :cycles do
@@ -14,13 +9,19 @@ BonusEngine::Engine.routes.draw do
     end
 
     resources :cycles, only: [:index, :show] do
-      resources :events, only: [:index, :show]
-    end
-
-    resources :events do
-      resources :points, only: [:create, :update]
+      resources :events, only: [:index, :show] do
+        resources :points
+      end
+      resources :users, only: [:index, :show]
     end
   end
 
+  namespace :admin do
+    match 'bonus', to: 'bonus#index', via: :get
+  end
+
+  resources :bonus, only: :index
+  get 'cycles/:cycle_id/events', to: 'bonus#index'
+  get 'cycles/:cycle_id/events/:id', to: 'bonus#index'
 end
 
