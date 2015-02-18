@@ -1,0 +1,17 @@
+<div class="admin-list">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+
+      <tr ng-repeat="cycle in cycles">
+        <td>{{cycle.name}}</td>
+        <td>
+          <a href="/cycles/{{cycle.id}}/events">See Events</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

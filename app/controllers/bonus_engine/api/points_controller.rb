@@ -5,6 +5,14 @@ module BonusEngine
       before_action :check_budget, only: [:create]
       before_action :check_update_budget, only: [:update]
 
+      def index
+        @points = if params[:receiver_id]
+         event.points.where receiver_id: params[:receiver_id], giver_id: current_user.id
+       else
+         event.points
+       end
+      end
+
       def create
         @point = BonusEngine::Point.new point_params
         if @point.save
@@ -38,19 +46,19 @@ module BonusEngine
       end
 
       def check_budget
-        unless budget_service.available_budget? params[:quantity].to_i
-          render json: {
-                          errors: { balance: 'You might be breaking the balance of the universe' }
-                       }, status: :unprocessable_entity
-        end
+        # unless budget_service.available_budget? params[:quantity].to_i
+        #   render json: {
+        #                   errors: { balance: 'You might be breaking the balance of the universe' }
+        #                }, status: :unprocessable_entity
+        # end
       end
 
       def check_update_budget
-        unless budget_service.available_update_budget? params[:quantity].to_i, params[:id]
-          render json: {
-                          errors: { balance: 'You might be breaking the balance of the universe' }
-                       }, status: :unprocessable_entity
-        end
+        # unless budget_service.available_update_budget? params[:quantity].to_i, params[:id]
+        #   render json: {
+        #                   errors: { balance: 'You might be breaking the balance of the universe' }
+        #                }, status: :unprocessable_entity
+        # end
       end
 
       def point_params
@@ -66,6 +74,10 @@ module BonusEngine
 
       def budget_service
         ::BudgetService.new current_event, current_user
+      end
+
+      def event
+        @event ||= BonusEngine::Event.find params[:event_id]
       end
     end
   end

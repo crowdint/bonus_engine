@@ -12,6 +12,28 @@
  *
  *= require_tree .
  *= require_self
- *= require angular-material
- *= require ngLoading
  */
+
+
+.bonus-admin-icon {
+  height: 35px;
+  position: relative;
+  width: 35px;
+}
+
+.bonus-container {
+  margin: 0 15px;
+}
+
+img.coworker-picture {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  width: 75px;
+}
+
+.affix {
+  top: 0;
+  background: #fff;
+  width: 1101px;
+}

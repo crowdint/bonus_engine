@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h2>{{event.name}}</h2>
+</div>
+
+
+<ul class="list-inline" data-spy="affix" data-offset-top="280" >
+  <li>
+    <strong>Points to distribute:</strong>
+    {{event.budget}}
+  </li>
+  <li>
+    <strong>Remaining Points:</strong>
+    {{remainingPoints}}
+  </li>
+</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">Coworker</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="point in points">
+      <td><img class="coworker-picture" ng-src="{{point.receiver.picture_url}}"></td>
+      <td>{{point.receiver.name}}</td>
+      <td><input type="text" ng-model="point.quantity" ng-blur="pointChange(point)"></td>
+    </tr>
+  </tbody>
+</table>

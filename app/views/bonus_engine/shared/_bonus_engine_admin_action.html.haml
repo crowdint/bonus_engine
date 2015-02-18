@@ -1,0 +1,6 @@
+- if current_user.roles.include?(workshops_admin) or current_user.is_admin
+  %li
+    = link_to bonus_engine.admin_bonus_path, id: 'admin-bonus-link' do
+      %p.admin-workshop-link Bonus
+      .bonus-admin-icon
+      .carpet-down

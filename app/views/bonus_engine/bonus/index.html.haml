@@ -1,0 +1,17 @@
+.row
+  .col-md-12
+    .span12.workshops
+      %header.workshops-header-container
+        %h3.workshop-header
+          %span.workshop-header-image
+          %span.workshops-title Bonus
+        %ul.workshops-menu
+          %li.last
+            = link_to 'Back to my Dashboard', main_app.user_path(current_user)
+          .workshops-header-decorator
+      %section
+        .section-content-wrapper{'ng-app' => 'BonusApp'}
+          %div.bonus-container{'ng-view' => ""}
+      %footer.workshops-footer-separator
+
+        .workshops-footer-icon
