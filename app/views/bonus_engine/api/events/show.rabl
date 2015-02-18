@@ -1,2 +1,2 @@
-attributes :id, :name, :opens_at, :closes_at, :budget, :maximum_points, :minimum_people, :msg_required
+attributes :id, :name, :opens_at, :closes_at, :budget, :maximum_points, :minimum_people, :msg_required, :active
 object @event

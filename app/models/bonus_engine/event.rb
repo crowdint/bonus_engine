@@ -16,5 +16,9 @@ module BonusEngine
         pending: 0
       }
     end
+
+    def active
+      opens_at < Time.now && closes_at > Time.now
+    end
   end
 end

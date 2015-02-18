@@ -17,6 +17,7 @@
 //= require angular-cookies
 //= require angular-rails-templates
 //= require angular-ui-bootstrap-tpls
+//= require bootstrap-multiselect
 //= require ng-rails-csrf
 //= require ./admin/main
 //= require_tree ./admin

@@ -6,11 +6,9 @@ module BonusEngine
       before_action :check_update_budget, only: [:update]
 
       def index
-        @points = if params[:receiver_id]
-         event.points.where receiver_id: params[:receiver_id], giver_id: current_user.id
-       else
-         event.points
-       end
+        @points = event.points
+        @points = @points.by_receiver_id(params[:receiver_id]) if params[:receiver_id]
+        @points = @points.by_giver_id(params[:giver_id]) if params[:giver_id]
       end
 
       def create
@@ -68,7 +66,8 @@ module BonusEngine
       end
 
       def set_stats
-        stats = current_event.stats_for current_user
+        user = BonusEngine::BonusEngineUser.find_by user_id: current_user.id
+        stats = current_event.stats_for user
         @balance, @pending = stats.values_at 'balance', 'pending'
       end
 

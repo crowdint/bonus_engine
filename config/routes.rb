@@ -16,6 +16,7 @@ BonusEngine::Engine.routes.draw do
       resources :events, only: [:index, :show] do
         resources :points
       end
+      get 'users/me', to: 'users#me'
       resources :users, only: [:index, :show]
     end
   end
@@ -31,5 +32,6 @@ BonusEngine::Engine.routes.draw do
   resources :bonus, only: :index
   get 'cycles/:cycle_id/events', to: 'bonus#index'
   get 'cycles/:cycle_id/events/:id', to: 'bonus#index'
+  get 'cycles/:cycle_id/events/:id/me', to: 'bonus#index'
 end
 

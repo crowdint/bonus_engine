@@ -1,5 +1,5 @@
-bonusApp.factory "Point", ($resource) ->
-  $resource("/api/cycles/:cycle_id/events/:event_id/points/:id", {id: '@id'},
+bonusAdminApp.factory "Event", ($resource) ->
+  $resource("/api/admin/cycles/:cycle_id/events/:id", {id: '@id'},
   {
    get:    {method: 'GET'},
    save:   {method: 'POST'},
@@ -7,5 +7,4 @@ bonusApp.factory "Point", ($resource) ->
    remove: {method: 'DELETE'},
    delete: {method: 'DELETE'}
    update: {method: "PUT"}
-   me:     {method: 'GET', params: {id: 'me'}}
   })

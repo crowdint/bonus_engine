@@ -7,6 +7,7 @@ require 'angularjs-rails'
 require 'angular-rails-templates'
 require 'ng-rails-csrf'
 require 'angular-ui-bootstrap-rails'
+require 'bootstrap-multiselect-rails'
 
 
 module BonusEngine

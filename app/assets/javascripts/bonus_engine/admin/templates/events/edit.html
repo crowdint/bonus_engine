@@ -1,0 +1,54 @@
+<div class="col-sm-12 form-workshop">
+  <form ng-submit="submitEditEvent()">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="span6">
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Name</label>
+            <input class="form-control" type="text" ng-model="eventForm.name"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Total of points to deal</label>
+            <input class="form-control" type="text" ng-model="eventForm.budget"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Maximum points per peer</label>
+            <input class="form-control" type="text" ng-model="eventForm.maximum_points"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Open at</label>
+            <input class="form-control" type="text" ng-model="eventForm.opens_at" datepicker-popup="" is-open="opened">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Close at</label>
+            <input class="form-control" type="text" ng-model="eventForm.closes_at" datepicker-popup="" is-open="opened">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-disabled" href="/admin/workshops">Cancel</a>
+          <input class="btn" name="commit" type="submit" value="Save">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="span3"></div>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>

@@ -7,7 +7,11 @@ module BonusEngine
       end
 
       def show
-        @user = [cycle.bonus_engine_users.find(params[:id]).try(:user)]
+        @user = cycle.bonus_engine_users.find(params[:id]).try(:user)
+      end
+
+      def me
+        @user = current_user
       end
 
       private

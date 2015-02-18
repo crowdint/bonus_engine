@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'angular-rails-templates'
   s.add_dependency 'ng-rails-csrf'
   s.add_dependency 'angular-ui-bootstrap-rails'
+  s.add_dependency 'bootstrap-multiselect-rails'
 
 
   s.add_development_dependency "database_cleaner"

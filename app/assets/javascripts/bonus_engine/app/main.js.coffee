@@ -20,6 +20,10 @@ window.bonusApp ||= angular.module('BonusApp', [
         templateUrl: 'bonus_engine/app/templates/events/show.html',
         controller: 'showEventsCtrl'
       }
+      .when '/cycles/:cycle_id/events/:event_id/me', {
+        templateUrl: 'bonus_engine/app/templates/events/me.html',
+        controller: 'meEventsCtrl'
+      }
       .otherwise {redirectTo: '/bonus'}
 
     $locationProvider.html5Mode(true)

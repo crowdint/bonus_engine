@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require bootstrap-multiselect
  *= require_self
  */
 
@@ -36,4 +37,8 @@ img.coworker-picture {
   top: 0;
   background: #fff;
   width: 1101px;
+}
+
+textarea.form-control {
+  color: #000;
 }
