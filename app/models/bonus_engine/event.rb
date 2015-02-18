@@ -10,11 +10,7 @@ module BonusEngine
     after_initialize
 
     def stats_for(user)
-      # user_points = user.points.where(event_id: self.id)
-      # {
-      #   balance: self.budget - user_points.sum(:quantity),
-      #   pending: self.minimum_people - user_points.count
-      # }
+      user_points = user.given_points.where(event_id: self.id)
       {
         balance: 0,
         pending: 0
