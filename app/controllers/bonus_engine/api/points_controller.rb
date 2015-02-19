@@ -30,7 +30,7 @@ module BonusEngine
       private
 
       def check_msg
-        unless current_event.msg_required && params[:message]
+        unless current_event.msg_required && params[:message].to_s.length >= 20
           render json: {
                           errors: { message: 'Dont be shy... please leave a bonito message' }
                        }, status: :unprocessable_entity

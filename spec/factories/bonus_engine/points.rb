@@ -3,6 +3,6 @@ FactoryGirl.define do
     giver_id 1
     receiver_id 2
     quantity 500
-    message "factory point"
+    message "she sell seashells by the seashore"
   end
 end
