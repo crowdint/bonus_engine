@@ -7,13 +7,13 @@ class BudgetService
   def available_update_budget?(quantity, id)
     (balance == 0 && point(id).quantity >= quantity) ||
       (balance > quantity) ||
-      (@event.maximum_points >= quantity && @event.minimum_points <= quantity)
+      (event_maximum_points >= quantity && event_minimum_points <= quantity)
   end
 
   def available_budget?(quantity)
     balance >= quantity &&
-      @event.maximum_points >= quantity &&
-      @event.minimum_points <= quantity
+      event_maximum_points >= quantity &&
+      event_minimum_points <= quantity
   end
 
   private
@@ -25,4 +25,13 @@ class BudgetService
   def point(id)
     BonusEngine::Point.find id
   end
+
+  def event_maximum_points
+    @event.maximum_points || @event.cycle.maximum_points
+  end
+
+  def event_minimum_points
+    @event.minimum_points || @event.cycle.minimum_points
+  end
+
 end

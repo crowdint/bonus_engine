@@ -3,18 +3,24 @@ module BonusEngine
     belongs_to :cycle
     has_many :points
 
-    validates_presence_of :name, :opens_at, :closes_at, :budget, :maximum_points, :msg_required
-    validates_numericality_of :budget, greater_than: 0
-    validates_numericality_of :maximum_points, greater_than: 0
-
-    after_initialize
+    validates_presence_of :name, :opens_at, :closes_at
 
     def stats_for(user)
       user_points = user.given_points.where(event_id: self.id)
       {
-        balance: self.budget - user_points.sum(:quantity),
-        pending: self.minimum_people - user_points.count
+        balance: event_budget - user_points.sum(:quantity),
+        pending: event_minimum_people - user_points.count
       }
+    end
+
+    private
+
+    def event_budget
+      self.budget || self.cycle.budget
+    end
+
+    def event_minimum_people
+      self.minimum_people || self.cycle.minimum_people
     end
   end
 end
