@@ -1,0 +1,30 @@
+<div class="col-sm-12 form-workshop">
+  <form ng-submit="submitEditCycle()">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="span6">
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Title</label>
+            <input class="form-control" type="text" ng-model="cycleForm.name"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> People</label>
+            <select multiple="multiple" class="form-control multi-select-users">
+              <option value="{{user.id}}" ng-repeat="user in users" >{{user.name}}</option>
+            </select>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-disabled" href="/admin/bonus">Cancel</a>
+          <input class="btn" name="commit" type="submit" value="Save">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="span3"></div>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>

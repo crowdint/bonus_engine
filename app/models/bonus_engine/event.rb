@@ -13,6 +13,10 @@ module BonusEngine
       }
     end
 
+    def active
+      opens_at < Time.now && closes_at > Time.now
+    end
+
     private
 
     def event_budget

@@ -1,0 +1,43 @@
+<div class="page-header">
+  <h2>{{event.name}}
+    <small class="pull-right">
+      <a href="/cycles/{{cycleId}}/events">Back to list events</a>
+      |
+      <a href="/cycles/{{cycleId}}/events/{{eventId}}/me" >See my results</a>
+    </small>
+  </h2>
+</div>
+
+
+<ul class="list-inline" data-spy="affix" data-offset-top="280" >
+  <li>
+    <h4>Points to distribute: <em>{{event.budget}}</em></h4>
+
+  </li>
+  <li>
+    <h4>Remaining Points: <em>{{remainingPoints}}</em></h4>
+  </li>
+</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">Coworker</th>
+      <th>Points</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="point in points">
+      <td><img class="coworker-picture" ng-src="{{point.receiver.picture_url}}"></td>
+      <td>{{point.receiver.name}}</td>
+      <td>
+        <input type="text" ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active">
+        <span ng-hide="event.active">{{point.quantity}}</span>
+      </td>
+      <td>
+        <a href="#" ng-click="setMessage(point)" ng-show="point.message.length > 0"> Edit Message</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

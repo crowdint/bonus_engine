@@ -1,3 +1,3 @@
-attributes :name
+attributes :id, :name
 
 object @cycle

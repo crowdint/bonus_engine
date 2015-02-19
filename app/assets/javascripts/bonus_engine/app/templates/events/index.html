@@ -1,0 +1,21 @@
+<div class="admin-list">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <th>Open at</th>
+        <th>End at</th>
+        <th>Actions</th>
+      </tr>
+
+      <tr ng-repeat="event in events">
+        <td>{{event.name}}</td>
+        <td>{{event.opens_at | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td>{{event.closes_at | date:'yyyy-MM-dd HH:mm' }}</td>
+        <td>
+          <a href="/cycles/{{cycleId}}/events/{{event.id}}">See Events</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

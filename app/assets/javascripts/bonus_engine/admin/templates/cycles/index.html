@@ -1,0 +1,19 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+
+    <tr ng-repeat="cycle in cycles">
+      <td>{{cycle.id}}</td>
+      <td>{{cycle.name}}</td>
+      <td>
+        <a href="/admin/bonus/cycles/{{cycle.id}}/events">Events<a>
+          <a href="/admin/bonus/cycles/{{cycle.id}}/edit">Edit<a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

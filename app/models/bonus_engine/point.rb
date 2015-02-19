@@ -6,5 +6,14 @@ module BonusEngine
 
     validates_presence_of :quantity, :receiver_id, :giver_id
     validates_numericality_of :quantity, greater_than: 0
+
+    def self.by_receiver_id(receiver_id)
+      where(receiver_id: receiver_id)
+    end
+
+    def self.by_giver_id(giver_id)
+      where(giver_id: giver_id)
+    end
+
   end
 end

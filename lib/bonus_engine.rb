@@ -3,6 +3,11 @@ require "bonus_engine/exceptions"
 require "services/user_service"
 require "services/authorization_service"
 require "services/budget_service"
+require 'angularjs-rails'
+require 'angular-rails-templates'
+require 'ng-rails-csrf'
+require 'angular-ui-bootstrap-rails'
+require 'bootstrap-multiselect-rails'
 
 
 module BonusEngine
@@ -14,5 +19,6 @@ module BonusEngine
         'User'.constantize
       end
     end
+
   end
 end

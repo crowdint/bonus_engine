@@ -5,6 +5,12 @@ module BonusEngine
       before_action :check_budget, only: [:create]
       before_action :check_update_budget, only: [:update]
 
+      def index
+        @points = event.points
+        @points = @points.by_receiver_id(params[:receiver_id]) if params[:receiver_id]
+        @points = @points.by_giver_id(params[:giver_id]) if params[:giver_id]
+      end
+
       def create
         @point = BonusEngine::Point.new point_params
         if @point.save
@@ -38,19 +44,19 @@ module BonusEngine
       end
 
       def check_budget
-        unless budget_service.available_budget? params[:quantity].to_i
-          render json: {
-                          errors: { balance: 'You might be breaking the balance of the universe' }
-                       }, status: :unprocessable_entity
-        end
+        # unless budget_service.available_budget? params[:quantity].to_i
+        #   render json: {
+        #                   errors: { balance: 'You might be breaking the balance of the universe' }
+        #                }, status: :unprocessable_entity
+        # end
       end
 
       def check_update_budget
-        unless budget_service.available_update_budget? params[:quantity].to_i, params[:id]
-          render json: {
-                          errors: { balance: 'You might be breaking the balance of the universe' }
-                       }, status: :unprocessable_entity
-        end
+        # unless budget_service.available_update_budget? params[:quantity].to_i, params[:id]
+        #   render json: {
+        #                   errors: { balance: 'You might be breaking the balance of the universe' }
+        #                }, status: :unprocessable_entity
+        # end
       end
 
       def point_params
@@ -60,12 +66,17 @@ module BonusEngine
       end
 
       def set_stats
-        stats = current_event.stats_for current_user
+        user = BonusEngine::BonusEngineUser.find_by user_id: current_user.id
+        stats = current_event.stats_for user
         @balance, @pending = stats.values_at 'balance', 'pending'
       end
 
       def budget_service
         ::BudgetService.new current_event, current_user
+      end
+
+      def event
+        @event ||= BonusEngine::Event.find params[:event_id]
       end
     end
   end

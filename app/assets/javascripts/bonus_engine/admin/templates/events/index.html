@@ -1,0 +1,27 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Open at</th>
+      <th>Close at</th>
+      <th>Active</th>
+      <th>Actions</th>
+    </tr>
+
+    <tr ng-repeat="event in events">
+      <td>{{event.id}}</td>
+      <td>{{event.name}}</td>
+      <td>{{event.opens_at | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>{{event.closes_at | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="event.active"></span>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-hide="event.active"></span>
+      </td>
+      <td>
+        <a href="/admin/bonus/cycles/{{cycle_id}}/events/{{event.id}}/edit">Edit<a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
