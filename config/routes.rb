@@ -19,12 +19,12 @@ BonusEngine::Engine.routes.draw do
       get 'users/me', to: 'users#me'
       resources :users, only: [:index, :show]
     end
-  end
-
     resources :events do
       resources :points, only: [:create, :update]
       resources :reports, only: [:index]
     end
+  end
+
   namespace :admin do
     match 'bonus', to: 'bonus#index', via: :get
   end
