@@ -12,7 +12,7 @@ describe BonusEngine::Api::PointsController do
       event_id: event.id,
       receiver_id: receiver.id,
       quantity: 400,
-      message: 'lorem ipsum dolo'
+      message: 'm'*20
     }
   }
 
@@ -83,14 +83,25 @@ describe BonusEngine::Api::PointsController do
       end
     end
 
-    context 'when message is mandatory' do
-      before do
-        event.update_attribute :msg_required, true
-        create_params[:message] = nil
-        post :create, create_params
+    context 'message is mandatory' do
+      before{ event.update_attribute :msg_required, true }
+      context 'sending empty message' do
+        before do
+          create_params[:message] = nil
+          post :create, create_params
+        end
+        it 'should not allow to create empty message points' do
+          expect(response.status).to be 422
+        end
       end
-      it 'should not allow to create empty message points' do
-        expect(response.status).to be 422
+      context 'sending a short message' do
+        before do
+          create_params[:message] = 'short message'
+          post :create, create_params
+        end
+        it 'should not allow to create short message points' do
+          expect(response.status).to be 422
+        end
       end
     end
   end
@@ -99,12 +110,12 @@ describe BonusEngine::Api::PointsController do
     context 'with good arguments' do
       let!(:existing_point){ create :point }
       before do
-        put :update, event_id: 1, id: existing_point.id, message: 'kidding'
+        put :update, event_id: 1, id: existing_point.id, message: 'm'*20
         existing_point.reload
       end
 
       it 'updates attributes' do
-        expect(existing_point.message).to be_eql 'kidding'
+        expect(existing_point.message).to be_eql 'm'*20
         expect(JSON.parse(response.body)['info']).to include('balance')
         expect(response.status).to be 200
       end
@@ -129,7 +140,7 @@ describe BonusEngine::Api::PointsController do
         create :point, receiver_id: 5, event_id: event.id
         create :point, receiver_id: 8, event_id: event.id
 
-        put :update, event_id: event.id, id: 1, quantity: 10, message: 'test'
+        put :update, event_id: event.id, id: 1, quantity: 10, message: 'm'*20
       end
       it 'wont create points beyond budget' do
         expect(response.status).to be 200
