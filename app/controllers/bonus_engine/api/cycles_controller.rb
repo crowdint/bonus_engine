@@ -4,7 +4,7 @@ module BonusEngine
       before_action :find_cycle, only: :show
 
       def index
-        @cycles = current_user.cycles
+        @cycles = current_engine_user.cycles
       end
 
       def show; end
