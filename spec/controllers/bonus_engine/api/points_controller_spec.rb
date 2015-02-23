@@ -4,9 +4,8 @@ describe BonusEngine::Api::PointsController do
   render_views
   let!(:cycle) { create :cycle }
   let!(:event) { create(:event, name: 'test') }
-  let!(:givencio) { create(:user, name: 'Givencio') }
-  let!(:giver) { create :bonus_engine_user }
-  let!(:receiver) { create(:user, name: 'Recibencio') }
+  let!(:giver) { create :bonus_engine_user, name: 'Givencio' }
+  let!(:receiver) { create(:bonus_engine_user, name: 'Recibencio') }
   let(:create_params){
     {
       event_id: event.id,

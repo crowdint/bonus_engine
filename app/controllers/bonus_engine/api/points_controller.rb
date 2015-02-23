@@ -66,8 +66,7 @@ module BonusEngine
       end
 
       def set_stats
-        user = BonusEngine::BonusEngineUser.find_by user_id: current_user.id
-        stats = current_event.stats_for user
+        stats = current_event.stats_for current_user
         @balance, @pending = stats.values_at 'balance', 'pending'
       end
 

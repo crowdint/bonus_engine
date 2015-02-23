@@ -6,12 +6,9 @@ describe BonusEngine::Api::Admin::ReportsController do
   let(:admin) { create(:admin_user) }
 
   let(:user){ create :bonus_engine_user }
-  let(:hugo_usr){ create :user, name: 'hugo' }
-  let(:hugo){ create :bonus_engine_user, user_id: hugo_usr.id }
-  let(:paco_usr){ create :user, name: 'paco' }
-  let(:paco){ create :bonus_engine_user, user_id: paco_usr.id }
-  let(:luis_usr){ create :user, name: 'luis' }
-  let(:luis){ create :bonus_engine_user, user_id: luis_usr.id }
+  let(:hugo){ create :bonus_engine_user, name: 'Hugo' }
+  let(:paco){ create :bonus_engine_user, name: 'Paco' }
+  let(:luis){ create :bonus_engine_user, name: 'Luis'}
   let(:event){ create :event }
 
   before do
