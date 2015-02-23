@@ -22,12 +22,9 @@ describe BonusEngine::Api::EventsController do
   end
 
   describe '#show' do
-    let(:hugo_usr){ create :user, name: 'Hugo' }
-    let(:hugo){ create :bonus_engine_user, user_id: hugo_usr.id }
-    let(:paco_usr){ create :user, name: 'Paco' }
-    let(:paco){ create :bonus_engine_user, user_id: paco_usr.id }
-    let(:luis_usr){ create :user, name: 'Luis' }
-    let(:luis){ create :bonus_engine_user, user_id: luis_usr.id }
+    let(:hugo){ create :bonus_engine_user, name: 'Hugo' }
+    let(:paco){ create :bonus_engine_user, name: 'Paco' }
+    let(:luis){ create :bonus_engine_user, name: 'Luis'}
     let!(:event) { create(:event, name: 'test') }
     let!(:cycle) {create :cycle}
 

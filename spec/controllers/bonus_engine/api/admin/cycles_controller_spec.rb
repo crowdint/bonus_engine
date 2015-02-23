@@ -89,7 +89,7 @@ describe BonusEngine::Api::Admin::CyclesController do
 
   describe "#index" do
     let!(:cycle) { create(:cycle, name: 'test') }
-    let(:expected_response) { [{"name" => 'test'}] }
+    let(:expected_response) { [{"id" => 1, "name" => 'test'}] }
 
     before do
       get :index

@@ -4,8 +4,7 @@ module BonusEngine
       before_action :find_cycle, only: :show
 
       def index
-        user = BonusEngine::BonusEngineUser.find_by user_id: current_user.id
-        @cycles = user.cycles
+        @cycles = current_engine_user.cycles
       end
 
       def show; end
