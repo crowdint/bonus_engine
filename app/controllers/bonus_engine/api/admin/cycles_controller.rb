@@ -6,7 +6,7 @@ module BonusEngine
 
         def create
           @cycle = Cycle.new(cycle_params)
-          if @cycle.save && associate_users
+          if @cycle.save
             render :show, cycle: @cycle, status: :created
           else
             render json: @cycle.errors, status: :unprocessable_entity
@@ -47,12 +47,9 @@ module BonusEngine
         end
 
         def cycle_params
-          params.require(:cycle).permit(:name)
+          params.require(:cycle).permit(:name, bonus_engine_user_ids: [])
         end
 
-        def users_params
-          params.require(:cycle).permit(bonus_engine_users_attributes: :id)
-        end
 
         def authorize_user
           AuthorizationService.authorize_owner! current_user
