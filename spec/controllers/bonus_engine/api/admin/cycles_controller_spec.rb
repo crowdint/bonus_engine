@@ -18,11 +18,7 @@ describe BonusEngine::Api::Admin::CyclesController do
         {
             cycle: {
                 name: 'test',
-                bonus_engine_users_attributes: [
-                  { id: hugo.id },
-                  { id: paco.id },
-                  { id: luis.id }
-                ]
+                bonus_engine_user_ids: [ hugo.id, paco.id, luis.id ]
             }
         }
       end
