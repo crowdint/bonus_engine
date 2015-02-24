@@ -3,7 +3,7 @@ module BonusEngine
     class UsersController < BaseController
 
       def index
-        @users = cycle.users - [current_user]
+        @users = cycle.bonus_engine_users - [current_user]
       end
 
       def show

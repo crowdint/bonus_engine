@@ -4,6 +4,9 @@ describe BonusEngine::Api::Admin::CyclesController do
   render_views
 
   let(:owner) { create :owner_user }
+  let(:hugo){ create :user, name: 'Hugo' }
+  let(:paco){ create :user, name: 'Paco' }
+  let(:luis){ create :user, name: 'Luis'}
 
   before do
     set_current_user(owner)
@@ -14,7 +17,12 @@ describe BonusEngine::Api::Admin::CyclesController do
       let(:params) do
         {
             cycle: {
-                name: 'test'
+                name: 'test',
+                bonus_engine_users_attributes: [
+                  { id: hugo.id },
+                  { id: paco.id },
+                  { id: luis.id }
+                ]
             }
         }
       end
@@ -26,6 +34,7 @@ describe BonusEngine::Api::Admin::CyclesController do
       it 'creates a new cycle' do
         expect(response.status).to be 201
         expect(params[:cycle][:name]).to eq JSON.parse(response.body)["name"]
+        expect(BonusEngine::Cycle.first.bonus_engine_users.count).to be > 0
       end
     end
 
