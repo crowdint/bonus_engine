@@ -17,14 +17,20 @@ module BonusEngine
       opens_at < Time.now && closes_at > Time.now
     end
 
-    private
-
     def event_budget
       self.budget || self.cycle.budget
     end
 
     def event_minimum_people
       self.minimum_people || self.cycle.minimum_people
+    end
+
+    def event_maximum_points
+      self.maximum_points || self.cycle.maximum_points
+    end
+
+    def event_msg_required
+      self.msg_required || self.cycle.msg_required
     end
   end
 end

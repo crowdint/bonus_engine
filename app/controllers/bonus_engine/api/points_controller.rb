@@ -44,11 +44,11 @@ module BonusEngine
       end
 
       def check_budget
-         unless budget_service.available_budget? params[:quantity].to_i
-           render json: {
-                           errors: { balance: 'You might be breaking the balance of the universe' }
-                        }, status: :unprocessable_entity
-         end
+        unless budget_service.available_budget? params[:quantity].to_i
+          render json: {
+                          errors: { balance: 'You might be breaking the balance of the universe' }
+                       }, status: :unprocessable_entity
+        end
       end
 
       def check_update_budget
@@ -66,12 +66,12 @@ module BonusEngine
       end
 
       def set_stats
-        stats = current_event.stats_for current_user
+        stats = current_event.stats_for current_engine_user
         @balance, @pending = stats.values_at 'balance', 'pending'
       end
 
       def budget_service
-        ::BudgetService.new current_event, current_user
+        ::BudgetService.new current_event, current_engine_user
       end
 
       def event

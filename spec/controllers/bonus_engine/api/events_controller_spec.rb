@@ -40,6 +40,9 @@ describe BonusEngine::Api::EventsController do
       expect(response.status).to be 200
       expect(event.name).to eq JSON.parse(response.body)["name"]
       expect(JSON.parse(response.body)["bonus_engine_points"].count).to eql 3
+      expect(JSON.parse(response.body)["budget"]).to eql 2000
+      expect(JSON.parse(response.body)["minimum_people"]).to eql 4
+      expect(JSON.parse(response.body)["maximum_points"]).to be > 0
     end
   end
 end

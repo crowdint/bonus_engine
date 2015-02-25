@@ -1,5 +1,9 @@
 object @event
-attributes :name, :opens_at, :closes_at
+attributes :id, :name, :opens_at, :closes_at, :active
+node(:budget){ |e| e.event_budget }
+node(:minimum_people){ |e| e.event_minimum_people }
+node(:maximum_points){ |e| e.event_maximum_points }
+node(:msg_required){ |e| e.event_msg_required }
 
 child(:points) do
   attributes :id, :message
