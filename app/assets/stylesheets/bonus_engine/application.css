@@ -33,12 +33,22 @@ img.coworker-picture {
   width: 75px;
 }
 
+td.coworker-picture-td {
+  width: 100px;
+}
 .affix {
   top: 0;
-  background: #fff;
-  width: 1101px;
+  background: rgb(234, 170, 161);
+  width: 100%;
+  color: white;
+  text-shadow: 1px 1px 3px gray;
 }
 
 textarea.form-control {
   color: #000;
+}
+
+td.message {
+  width: 400px;
+  font-size: 12px;
 }

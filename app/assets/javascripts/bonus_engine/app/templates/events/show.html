@@ -17,6 +17,10 @@
   <li>
     <h4>Remaining Points: <em>{{remainingPoints}}</em></h4>
   </li>
+  <li>
+  <h5>You can assign between <em>{{event.minimum_points}}</em> and <em>{{event.maximum_points}} points.</em></h5>
+  </li>
+
 </ul>
 
 <table class="table">
@@ -29,14 +33,16 @@
   </thead>
   <tbody>
     <tr ng-repeat="point in points">
-      <td><img class="coworker-picture" ng-src="{{point.receiver.picture_url}}"></td>
+      <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}"></td>
       <td>{{point.receiver.name}}</td>
       <td>
-        <input type="text" ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active">
+        <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active">
         <span ng-hide="event.active">{{point.quantity}}</span>
       </td>
-      <td>
-        <a href="#" ng-click="setMessage(point)" ng-show="point.message.length > 0"> Edit Message</a>
+      <td class='message'>
+        {{point.message}}
+        </br>
+        <a href="#" ng-click="setMessage(point)" ng-show="point.message.length > 0"> Edit</a>
       </td>
     </tr>
   </tbody>
