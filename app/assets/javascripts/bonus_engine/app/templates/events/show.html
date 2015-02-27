@@ -26,13 +26,16 @@
 <table class="table">
   <thead>
     <tr>
-      <th colspan="2">Coworker</th>
+      <th colspan="2">
+        Coworker
+        <input type="text" ng-model="searchText">
+      </th>
       <th>Points</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="point in points">
+    <tr ng-repeat="point in points | filter:searchText">
       <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}"></td>
       <td>{{point.receiver.name}}</td>
       <td>
