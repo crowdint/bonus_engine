@@ -35,5 +35,6 @@ BonusEngine::Engine.routes.draw do
   get 'cycles/:cycle_id/events', to: 'bonus#index'
   get 'cycles/:cycle_id/events/:id', to: 'bonus#index'
   get 'cycles/:cycle_id/events/:id/me', to: 'bonus#index'
+  get 'cycles/:cycle_id/events/:event_id/users/:id', to: 'bonus#index'
 end
 
