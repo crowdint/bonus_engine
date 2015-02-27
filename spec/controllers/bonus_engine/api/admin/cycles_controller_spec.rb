@@ -18,8 +18,8 @@ describe BonusEngine::Api::Admin::CyclesController do
         {
             cycle: {
                 name: 'test',
-                bonus_engine_user_ids: [ hugo.id, paco.id, luis.id ]
-            }
+            },
+            bonus_engine_user_ids: [ hugo.id, paco.id, luis.id ]
         }
       end
 
@@ -94,7 +94,7 @@ describe BonusEngine::Api::Admin::CyclesController do
 
   describe "#index" do
     let!(:cycle) { create(:cycle, name: 'test') }
-    let(:expected_response) { [{"id" => 1, "name" => 'test'}] }
+    let(:expected_response) { [{"id"=>1, "name"=>"test", "budget"=>2000, "maximum_points"=>400, "minimum_people"=>4, "msg_required"=>true, "minimum_points"=>1, "bonus_engine_user_ids"=>[]}] }
 
     before do
       get :index

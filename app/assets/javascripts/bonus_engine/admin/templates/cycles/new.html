@@ -8,6 +8,44 @@
             <input class="form-control" type="text" ng-model="cycleForm.name"></div>
         </div>
 
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Total of points to deal</label>
+            <input class="form-control" type="text" ng-model="cycleForm.budget"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Maximum points per peer</label>
+            <input class="form-control" type="text" ng-model="cycleForm.maximum_points"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Minimum points per peer</label>
+            <input class="form-control" type="text" ng-model="cycleForm.minimum_people"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Message to peer required</label>
+            <input class="form-control" type="checkbox" ng-model="cycleForm.msg_required"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> People</label>
+            {{cycleForm.bonus_engine_user_ids}}
+
+            <ui-select multiple ng-model="cycleForm.bonus_engine_user_ids" theme="bootstrap" ng-disabled="disabled">
+              <ui-select-match placeholder="Select person...">{{$item.name}}</ui-select-match>
+              <ui-select-choices repeat="user.id as user in users | propsFilter: {name: $select.search}">
+                <div ng-bind-html="user.name"></div>
+              </ui-select-choices>
+            </ui-select>
+
+        </div>
+
         <div class="actions">
           <a class="btn btn-disabled" href="/admin/workshops">Cancel</a>
           <input class="btn" name="commit" type="submit" value="Save">

@@ -13,6 +13,7 @@
  *= require_tree .
  *= require bootstrap-multiselect
  *= require_tree ./sections
+ *= require bonus_engine/select.min
  *= require_self
  */
 

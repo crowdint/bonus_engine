@@ -6,9 +6,9 @@ class CreateBonusEngineEvents < ActiveRecord::Migration
       t.string :name
       t.datetime :opens_at
       t.datetime :closes_at
+      t.integer :cycle_id
 
       t.timestamps null: false
     end
-    add_foreign_key :bonus_engine_events, :cycles
   end
 end

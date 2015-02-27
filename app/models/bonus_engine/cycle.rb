@@ -6,5 +6,6 @@ module BonusEngine
 
     has_many :events
     has_and_belongs_to_many :bonus_engine_users
+
   end
 end
