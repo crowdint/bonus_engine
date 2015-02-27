@@ -54,3 +54,7 @@ td.message {
   width: 400px;
   font-size: 12px;
 }
+ 
+.section-content-wrapper {
+  padding: 15px;
+}
