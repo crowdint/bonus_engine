@@ -5,20 +5,10 @@
         %span.workshop-header-image
         %span.workshops-title Bonus
       %ul.workshops-menu
-        %li
-          = link_to 'Active bonus events',
-            bonus_engine.bonus_path(active: true),
-            class: 'badges-first-link'
         %li.last
           = link_to 'All bonus events', bonus_engine.bonus_path
       .workshops-header-decorator
   .row
     .section-content-wrapper
-      = show_last_active_published_workshop
-  .row
-    - if show_workshop_month
-      %footer.workshops-footer
-        %p
-          Workshops from
-          = show_workshop_month
-        .workshops-footer-icon
+      %ul
+        = show_active_bonus_events

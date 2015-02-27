@@ -6,5 +6,9 @@ module BonusEngine
 
     has_many :events
     has_and_belongs_to_many :bonus_engine_users
+
+    def active_events
+      self.events.select{ |e| e.active }
+    end
   end
 end

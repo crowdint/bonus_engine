@@ -12,5 +12,11 @@ module BonusEngine
     config.to_prepare do
       Rails.application.config.engines_list << 'BonusEngine'
     end
+
+    initializer :action_controller do
+      ActiveSupport.on_load :action_controller do
+        helper BonusEngine::ApplicationHelper
+      end
+    end
   end
 end

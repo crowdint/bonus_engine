@@ -42,3 +42,7 @@ img.coworker-picture {
 textarea.form-control {
   color: #000;
 }
+
+.section-content-wrapper {
+  padding: 15px;
+}
