@@ -27,6 +27,7 @@ BonusEngine::Engine.routes.draw do
 
   namespace :admin do
     match 'bonus', to: 'bonus#index', via: :get
+    match 'bonus/cycles/:cycle_id/events/new', to: 'bonus#index', via: :get
   end
 
   resources :bonus, only: :index

@@ -1,0 +1,29 @@
+.datepicker {
+  table {
+    td {
+      border-top: none !important;
+      height: 20px !important;
+
+      span {
+        height: 18px !important;
+        line-height: 1 !important;
+      }
+
+      button {
+        color: #333333 !important;
+        background-color: white !important;
+        border-color: #cccccc !important;
+        height: 20px !important;
+      }
+    }
+    .btn-info.active {
+      background: #eba299 !important;
+      color: #fff !important;
+    }
+
+    .btn {
+      width: 100%;
+      border: 1px solid #eee;
+    }
+  }
+}

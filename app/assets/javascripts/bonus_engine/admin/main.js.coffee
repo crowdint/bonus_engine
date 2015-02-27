@@ -3,7 +3,8 @@ window.bonusAdminApp ||= angular.module('BonusAdminApp', [
   'ngAnimate',
   'ngRoute',
   'ng-rails-csrf',
-  'templates'
+  'templates',
+  'ui.bootstrap'
   ]).config(($routeProvider, $locationProvider, $httpProvider) ->
 
     $routeProvider
