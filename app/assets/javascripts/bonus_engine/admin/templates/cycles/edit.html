@@ -1,4 +1,4 @@
-<div class="col-sm-12 form-workshop">
+<div class="col-sm-12 form-workshop" ng-cloak>
   <form ng-submit="submitEditCycle()">
     <div class="col-md-6 col-md-offset-3">
       <div class="span6">
@@ -10,10 +10,39 @@
 
         <div class="field">
           <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Total of points to deal</label>
+            <input class="form-control" type="text" ng-model="cycleForm.budget"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Maximum points per peer</label>
+            <input class="form-control" type="text" ng-model="cycleForm.maximum_points"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Minimum points per peer</label>
+            <input class="form-control" type="text" ng-model="cycleForm.minimum_people"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
+            <label class="control-label"><abbr title="required">*</abbr> Message to peer required</label>
+            <input class="form-control" type="checkbox" ng-model="cycleForm.msg_required"></div>
+        </div>
+
+        <div class="field">
+          <div class="form-group">
             <label class="control-label"><abbr title="required">*</abbr> People</label>
-            <select multiple="multiple" class="form-control multi-select-users">
-              <option value="{{user.id}}" ng-repeat="user in users" >{{user.name}}</option>
-            </select>
+
+            <ui-select multiple='true' ng-model="cycleForm.bonus_engine_user_ids" theme="bootstrap" ng-disabled="disabled">
+              <ui-select-match placeholder="Select person...">{{$item.name}}</ui-select-match>
+              <ui-select-choices repeat="user.id as user in users track by $index">
+                <div ng-bind-html="user.name | highlight: $select.search"></div>
+              </ui-select-choices>
+            </ui-select>
+
         </div>
 
         <div class="actions">

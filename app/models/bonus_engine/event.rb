@@ -29,6 +29,10 @@ module BonusEngine
       self.maximum_points || self.cycle.maximum_points
     end
 
+    def event_minimum_points
+      self.minimum_points || self.cycle.minimum_points
+    end
+
     def event_msg_required
       self.msg_required || self.cycle.msg_required
     end

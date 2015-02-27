@@ -7,6 +7,7 @@ module BonusEngine
         def create
           @cycle = Cycle.new(cycle_params)
           if @cycle.save
+            associate_users
             render :show, cycle: @cycle, status: :created
           else
             render json: @cycle.errors, status: :unprocessable_entity
@@ -24,6 +25,7 @@ module BonusEngine
 
         def update
           if @cycle.update(cycle_params)
+            associate_users
             render :show, status: :ok
           else
             render json: @cycle.errors, status: :unprocessable_entity
@@ -35,19 +37,25 @@ module BonusEngine
         private
 
         def associate_users
-          users_params[:bonus_engine_users_attributes].each do |u|
-            user = BonusEngine::BonusEngineUser.find u['id']
-            @cycle.bonus_engine_users << user
-            @cycle.save
+          users = (params[:bonus_engine_user_ids] || []).map do |bonus_engine_user_ids|
+            BonusEngine::BonusEngineUser.find bonus_engine_user_ids
           end
+          @cycle.bonus_engine_users = users
         end
 
         def find_cycle
-          @cycle = Cycle.find(params[:id])
+          @cycle ||= Cycle.find(params[:id])
         end
 
         def cycle_params
-          params.require(:cycle).permit(:name, bonus_engine_user_ids: [])
+          params.require(:cycle).permit(:name,
+            :id,
+            :budget,
+            :maximum_points,
+            :minimum_people,
+            :msg_required,
+            :minimum_points,
+            bonus_engine_user_ids: [])
         end
 
 

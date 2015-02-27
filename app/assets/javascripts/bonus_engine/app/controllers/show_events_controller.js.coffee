@@ -56,7 +56,7 @@ bonusApp.controller 'showEventsCtrl', ($scope, $routeParams, $location, Event, U
   $scope.pointChange = (point) ->
     $scope.calculateRemainingPoints()
     unless $scope.editingPoint
-      if $scope.remainingPoints > 0
+      if $scope.remainingPoints > 0 and point.quantity > 0
         $scope.setMessage point
       else
         point.quantity = 0
@@ -65,6 +65,7 @@ bonusApp.controller 'showEventsCtrl', ($scope, $routeParams, $location, Event, U
   $scope.calculateRemainingPoints =  ->
     $scope.remainingPoints = $scope.event.budget
     angular.forEach $scope.points, (point) ->
+      point.quantity = 0 if point.quantity == undefined
       $scope.remainingPoints = $scope.remainingPoints - point.quantity
 
   $scope.updatePoints = (point) ->

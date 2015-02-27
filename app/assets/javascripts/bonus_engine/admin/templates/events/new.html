@@ -23,20 +23,16 @@
         <div class="field">
           <div class="form-group">
             <label class="control-label"><abbr title="required">*</abbr> Open at</label>
-            <input class="form-control" type="text" ng-model="eventForm.opens_at" datepicker-popup="" is-open="opened">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+            <input type="text" class="form-control" ng-model="eventForm.opens_at" disabled="true">
+            <datepicker ng-model="eventForm.opens_at" min-date="minDate" show-weeks="false" class="well well-sm datepicker"></datepicker>
           </div>
         </div>
 
         <div class="field">
           <div class="form-group">
             <label class="control-label"><abbr title="required">*</abbr> Close at</label>
-            <input class="form-control" type="text" ng-model="eventForm.closes_at" datepicker-popup="" is-open="opened">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
+            <input type="text" class="form-control" ng-model="eventForm.closes_at" disabled="true">
+            <datepicker ng-model="eventForm.closes_at" min-date="minDate" show-weeks="false" class="well well-sm datepicker"></datepicker>
           </div>
         </div>
 

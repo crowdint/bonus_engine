@@ -1,5 +1,5 @@
-bonusAdminApp.factory "User", ($resource) ->
-  $resource("/api/admin/users/:id", {id: '@id'},
+bonusAdminApp.factory "Event", ($resource) ->
+  $resource("/api/admin/cycles/:cycle_id/events/:id", {id: '@id'},
   {
    get:    {method: 'GET'},
    save:   {method: 'POST'},

@@ -15,9 +15,11 @@
 //= require angular-animate
 //= require angular-resource
 //= require angular-cookies
+//= require angular-sanitize
 //= require angular-rails-templates
 //= require angular-ui-bootstrap-tpls
 //= require bootstrap-multiselect
+//= require bonus_engine/select
 //= require ng-rails-csrf
 //= require ./admin/main
 //= require_tree ./admin
