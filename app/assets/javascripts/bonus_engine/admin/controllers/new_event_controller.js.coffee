@@ -1,4 +1,4 @@
-bonusAdminApp.controller 'adminNewEventCtrl', ($scope, $location, Event, $routeParams) ->
+bonusAdminApp.controller 'adminNewEventCtrl', ['$scope', '$location', 'Event', '$routeParams', ($scope, $location, Event, $routeParams) ->
   $scope.partialUrl = "bonus_engine/admin/templates/events/new.html";
   $scope.btnLabel = 'Return to list of events'
   $scope.cycle_id = $routeParams.cycle_id
@@ -17,3 +17,4 @@ bonusAdminApp.controller 'adminNewEventCtrl', ($scope, $location, Event, $routeP
     $event.stopPropagation();
 
     $scope.opened = true;
+]

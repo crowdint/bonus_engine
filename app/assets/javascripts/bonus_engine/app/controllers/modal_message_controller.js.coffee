@@ -1,4 +1,4 @@
-bonusApp.controller 'modalMessageCtrl', ($scope, $modalInstance, pointToEdit, eventActive) ->
+bonusApp.controller 'modalMessageCtrl', ['$scope', '$modalInstance', 'pointToEdit', 'eventActive', ($scope, $modalInstance, pointToEdit, eventActive) ->
   $scope.message = pointToEdit.message
   $scope.pointToEdit = pointToEdit
   $scope.buttonDisabled = if $scope.message.length >= 20 then false else true
@@ -7,7 +7,7 @@ bonusApp.controller 'modalMessageCtrl', ($scope, $modalInstance, pointToEdit, ev
   console.log($scope.eventActive)
 
   $scope.validateMinLength = ->
-    if $scope.message.length >= 20 
+    if $scope.message.length >= 20
       $scope.buttonDisabled = false
     else
       $scope.buttonDisabled = true
@@ -23,3 +23,4 @@ bonusApp.controller 'modalMessageCtrl', ($scope, $modalInstance, pointToEdit, ev
     $event.stopPropagation();
 
     $scope.opened = true;
+]

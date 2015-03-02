@@ -1,4 +1,4 @@
-bonusApp.controller 'meEventsCtrl', ($scope, $routeParams, $location, Event, User, Point, $filter) ->
+bonusApp.controller 'meEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', ($scope, $routeParams, $location, Event, User, Point, $filter) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.event = Event.get {cycle_id: $scope.cycleId, id: $scope.eventId}
@@ -19,3 +19,4 @@ bonusApp.controller 'meEventsCtrl', ($scope, $routeParams, $location, Event, Use
       )
     )
   )
+]

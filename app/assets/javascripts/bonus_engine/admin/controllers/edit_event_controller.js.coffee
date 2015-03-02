@@ -1,4 +1,4 @@
-bonusAdminApp.controller 'adminEditEventCtrl', ($scope, $location, $routeParams, Event) ->
+bonusAdminApp.controller 'adminEditEventCtrl', ['$scope', '$location', '$routeParams', 'Event', ($scope, $location, $routeParams, Event) ->
   $scope.partialUrl = "bonus_engine/admin/templates/events/edit.html";
   $scope.cycle_id = $routeParams.cycle_id
   $scope.eventForm = Event.get({cycle_id: $scope.cycle_id, id: $routeParams.id})
@@ -10,3 +10,4 @@ bonusAdminApp.controller 'adminEditEventCtrl', ($scope, $location, $routeParams,
       $location.path($scope.btnUrl)
     , (error) ->
       $scope.erroOnCreate = true
+]

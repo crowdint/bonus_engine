@@ -1,4 +1,4 @@
-bonusAdminApp.controller 'adminNewCyclesCtrl', ($scope, $location, Cycle, User) ->
+bonusAdminApp.controller 'adminNewCyclesCtrl', ['$scope', '$location', 'Cycle', 'User', ($scope, $location, Cycle, User) ->
   $scope.partialUrl = "bonus_engine/admin/templates/cycles/new.html";
   $scope.btnLabel = 'Return to list of cycles'
   $scope.btnUrl = '/admin/bonus/cycles'
@@ -10,3 +10,4 @@ bonusAdminApp.controller 'adminNewCyclesCtrl', ($scope, $location, Cycle, User) 
       $location.path('/admin/bonus')
     , (error) ->
       $scope.erroOnCreate = true
+]

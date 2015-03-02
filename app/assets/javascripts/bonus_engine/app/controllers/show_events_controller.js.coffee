@@ -1,4 +1,4 @@
-bonusApp.controller 'showEventsCtrl', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal) ->
+bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', '$modal', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.editingPoint = false;
@@ -77,3 +77,4 @@ bonusApp.controller 'showEventsCtrl', ($scope, $routeParams, $location, Event, U
 
   $scope.setUser = (point) ->
     point.receiver = $filter('filter')($scope.users, {id: point.receiver_id})[0];
+]

@@ -1,4 +1,4 @@
-bonusApp.controller 'showUsersCtrl', ($scope, $routeParams, $location, Event, User, Point, $filter) ->
+bonusApp.controller 'showUsersCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', ($scope, $routeParams, $location, Event, User, Point, $filter) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.userId = $routeParams.user_id
@@ -19,3 +19,4 @@ bonusApp.controller 'showUsersCtrl', ($scope, $routeParams, $location, Event, Us
       )
     )
   )
+]

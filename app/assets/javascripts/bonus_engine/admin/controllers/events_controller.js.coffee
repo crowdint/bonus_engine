@@ -1,4 +1,4 @@
-bonusAdminApp.controller 'adminEventsCtrl', ($scope, $location, $routeParams, Event) ->
+bonusAdminApp.controller 'adminEventsCtrl', ['$scope', '$location', '$routeParams', 'Event', ($scope, $location, $routeParams, Event) ->
   $scope.partialUrl = "bonus_engine/admin/templates/events/index.html";
   $scope.cycle_id = $routeParams.cycle_id
   $scope.btnLabel = 'Create new event'
@@ -7,3 +7,4 @@ bonusAdminApp.controller 'adminEventsCtrl', ($scope, $location, $routeParams, Ev
 
 
   $scope.events = Event.query({cycle_id: $scope.cycle_id});
+]
