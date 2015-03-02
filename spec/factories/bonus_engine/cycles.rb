@@ -6,5 +6,11 @@ FactoryGirl.define do
     minimum_points 1
     minimum_people 4
     msg_required true
+
+    after(:create) do  |cycle|
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Hugo')
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Paco')
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Luis')
+    end
   end
 end

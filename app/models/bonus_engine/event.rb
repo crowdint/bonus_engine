@@ -18,7 +18,7 @@ module BonusEngine
     end
 
     def event_budget
-      self.budget || self.cycle.budget
+      (self.budget || self.cycle.budget) / self.cycle.bonus_engine_users.count
     end
 
     def event_minimum_people

@@ -17,6 +17,8 @@ describe BonusEngine::Api::PointsController do
 
   before do
     cycle.events << event
+    cycle.bonus_engine_users << giver
+    cycle.bonus_engine_users << receiver
     set_current_user giver
   end
 
@@ -47,10 +49,7 @@ describe BonusEngine::Api::PointsController do
 
     context 'user cannot spend more budget than assigned' do
       before do
-        create :point, receiver_id: 3, event_id: event.id
-        create :point, receiver_id: 4, event_id: event.id
-        create :point, receiver_id: 5, event_id: event.id
-        create :point, receiver_id: 8, event_id: event.id
+        create :point, giver_id: giver.id, receiver_id: 3, event_id: event.id, quantity: 100
 
         post :create, create_params
       end

@@ -94,7 +94,14 @@ describe BonusEngine::Api::Admin::CyclesController do
 
   describe "#index" do
     let!(:cycle) { create(:cycle, name: 'test') }
-    let(:expected_response) { [{"id"=>1, "name"=>"test", "budget"=>2000, "maximum_points"=>400, "minimum_people"=>4, "msg_required"=>true, "minimum_points"=>1, "bonus_engine_user_ids"=>[]}] }
+    let(:expected_response) { [{"id"=>1, "name"=>"test", "budget"=>2000,
+                                "maximum_points"=>400, "minimum_people"=>4,
+                                "msg_required"=>true, "minimum_points"=>1,
+                                "bonus_engine_user_ids"=>
+                                   [{"id"=>2, "name"=>"Hugo", "email"=>nil},
+                                    {"id"=>3, "name"=>"Paco", "email"=>nil},
+                                    {"id"=>4, "name"=>"Luis", "email"=>nil}]
+    }]}
 
     before do
       get :index
@@ -102,7 +109,7 @@ describe BonusEngine::Api::Admin::CyclesController do
 
     it "returns a collection of cycles" do
       expect(response.status).to be 200
-      expect(expected_response).to eq JSON.parse(response.body)
+      expect(expected_response).to eql JSON.parse(response.body)
     end
   end
 

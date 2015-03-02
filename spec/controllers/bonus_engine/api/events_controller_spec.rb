@@ -4,11 +4,12 @@ describe BonusEngine::Api::EventsController do
   render_views
 
   describe "#index" do
-    let!(:cycle) { create :cycle }
-    let!(:cycle2) { create :cycle }
+    let(:cycle){ create :cycle }
+    let(:cycle2){ create :cycle }
+
     before do
-      cycle.events << create(:event, name: 'cycle 1 event')
-      cycle2.events << create(:event, name: 'cycle 2 event')
+      cycle.events << create(:event, name: 'Cycle1 Event')
+      cycle2.events << create(:event, name: 'Cycle2 Event')
       get :index, cycle_id: cycle.id
     end
 
@@ -22,14 +23,14 @@ describe BonusEngine::Api::EventsController do
   end
 
   describe '#show' do
-    let(:hugo){ create :bonus_engine_user, name: 'Hugo' }
-    let(:paco){ create :bonus_engine_user, name: 'Paco' }
-    let(:luis){ create :bonus_engine_user, name: 'Luis'}
+    let!(:cycle) { create :cycle, budget: 3000 }
     let!(:event) { create(:event, name: 'test') }
-    let!(:cycle) {create :cycle}
 
     before do
       cycle.events << event
+      hugo = cycle.bonus_engine_users.find(1)
+      paco = cycle.bonus_engine_users.find(2)
+      luis = cycle.bonus_engine_users.find(3)
       create :point, giver_id: hugo.id, receiver_id: paco.id, event_id: event.id
       create :point, giver_id: paco.id, receiver_id: luis.id, event_id: event.id
       create :point, giver_id: luis.id, receiver_id: paco.id, event_id: event.id
@@ -40,7 +41,7 @@ describe BonusEngine::Api::EventsController do
       expect(response.status).to be 200
       expect(event.name).to eq JSON.parse(response.body)["name"]
       expect(JSON.parse(response.body)["bonus_engine_points"].count).to eql 3
-      expect(JSON.parse(response.body)["budget"]).to eql 2000
+      expect(JSON.parse(response.body)["budget"]).to eql 1000
       expect(JSON.parse(response.body)["minimum_people"]).to eql 4
       expect(JSON.parse(response.body)["maximum_points"]).to be > 0
     end
