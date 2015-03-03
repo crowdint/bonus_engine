@@ -14,6 +14,7 @@
  *= require bootstrap-multiselect
  *= require_tree ./sections
  *= require bonus_engine/select.min
+ *= require bonus_engine/angular-chart
  *= require_self
  */
 
@@ -54,7 +55,7 @@ td.message {
   width: 400px;
   font-size: 12px;
 }
- 
+
 .section-content-wrapper {
   padding: 15px;
 }

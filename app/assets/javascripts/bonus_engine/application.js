@@ -20,6 +20,8 @@
 //= require angular-ui-bootstrap-tpls
 //= require bootstrap-multiselect
 //= require bonus_engine/select
+  //= require bonus_engine/chart.min
+//= require bonus_engine/angular-chart.min
 //= require ng-rails-csrf
 //= require ./admin/main
 //= require_tree ./admin

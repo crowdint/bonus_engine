@@ -6,7 +6,8 @@ window.bonusAdminApp ||= angular.module('BonusAdminApp', [
   'templates',
   'ui.bootstrap',
   'ui.select',
-  'ngSanitize'
+  'ngSanitize',
+  'chart.js'
   ]).config(($routeProvider, $locationProvider, $httpProvider) ->
 
     $routeProvider
@@ -33,6 +34,10 @@ window.bonusAdminApp ||= angular.module('BonusAdminApp', [
       .when '/admin/bonus/cycles/:cycle_id/events/:id/edit', {
         templateUrl: 'bonus_engine/admin/templates/main.html',
         controller: 'adminEditEventCtrl',
+      }
+      .when '/admin/bonus/cycles/:cycle_id/events/:id/results', {
+        templateUrl: 'bonus_engine/admin/templates/main.html',
+        controller: 'adminResultsEventCtrl',
       }
       .otherwise {redirectTo: '/admin/bonus'}
 
