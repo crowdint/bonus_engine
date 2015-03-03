@@ -10,6 +10,8 @@ describe BonusEngine::Api::EventsController do
     before do
       cycle.events << create(:event, name: 'Cycle1 Event')
       cycle2.events << create(:event, name: 'Cycle2 Event')
+
+      set_current_user cycle.bonus_engine_users.first
       get :index, cycle_id: cycle.id
     end
 
@@ -34,6 +36,8 @@ describe BonusEngine::Api::EventsController do
       create :point, giver_id: hugo.id, receiver_id: paco.id, event_id: event.id
       create :point, giver_id: paco.id, receiver_id: luis.id, event_id: event.id
       create :point, giver_id: luis.id, receiver_id: paco.id, event_id: event.id
+
+      set_current_user cycle.bonus_engine_users.first
       get :show, id: event.id, cycle_id: cycle.id
     end
 
@@ -44,6 +48,7 @@ describe BonusEngine::Api::EventsController do
       expect(JSON.parse(response.body)["budget"]).to eql 1000
       expect(JSON.parse(response.body)["minimum_people"]).to eql 4
       expect(JSON.parse(response.body)["maximum_points"]).to be > 0
+      expect(JSON.parse(response.body)["info"]["balance"]).to be_a Integer
     end
   end
 end

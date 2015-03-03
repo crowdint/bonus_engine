@@ -11,3 +11,5 @@ child(:points) do
   node(:giver){ |point| { name: point.giver.name, id: point.giver.id } }
   node(:receiver){ |point| { name: point.receiver.name, id: point.receiver.id } }
 end
+
+node(:info) { |e| e.stats_for(@current_engine_user) }

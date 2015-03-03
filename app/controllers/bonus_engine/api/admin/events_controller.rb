@@ -2,7 +2,7 @@ module BonusEngine
   module Api
     module Admin
       class EventsController < BaseController
-        before_action :find_cycle
+        before_action :find_cycle, :current_engine_user
 
         def create
           @event = @cycle.events.build event_params

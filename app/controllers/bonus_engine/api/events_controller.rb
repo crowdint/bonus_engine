@@ -1,7 +1,7 @@
 module BonusEngine
   module Api
     class EventsController < BaseController
-      before_action :find_cycle
+      before_action :find_cycle, :current_engine_user
 
       def index
         @events = @cycle.events

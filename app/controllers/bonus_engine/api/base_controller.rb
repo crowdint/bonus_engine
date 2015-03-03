@@ -6,7 +6,7 @@ module BonusEngine
       end
 
       def current_engine_user
-        BonusEngine::BonusEngineUser.find current_user.id
+        @current_engine_user ||= BonusEngine::BonusEngineUser.find current_user.id
       end
     end
   end
