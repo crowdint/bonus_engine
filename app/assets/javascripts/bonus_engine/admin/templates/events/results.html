@@ -1,0 +1,19 @@
+<canvas id="bar" class="chart chart-bar" data="data" labels="labels"></canvas>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="2">User</th>
+      <th>Received Points</th>
+      <th>Peers shared</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{user.name}}</td>
+      <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{user.picture_url}}"></td>
+      <td>{{user.received_points}}</td>
+      <td>{{user.given_peers}}</td>
+    </tr>
+  </tbody>
+</table>
