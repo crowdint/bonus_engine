@@ -23,7 +23,7 @@
         <div class="field">
           <div class="form-group">
             <label class="control-label"><abbr title="required">*</abbr> Open at</label>
-            <input type="text" class="form-control" ng-model="eventForm.opens_at" disabled="true">
+            <input type="text" class="form-control" value="{{eventForm.opens_at | date:'yyyy-MM-dd'}}" disabled="true">
             <datepicker ng-model="eventForm.opens_at" min-date="minDate" show-weeks="false" class="well well-sm datepicker"></datepicker>
           </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="field">
           <div class="form-group">
             <label class="control-label"><abbr title="required">*</abbr> Close at</label>
-            <input type="text" class="form-control" ng-model="eventForm.closes_at" disabled="true">
+            <input type="text" class="form-control" value="{{eventForm.closes_at | date:'yyyy-MM-dd'}}" disabled="true">
             <datepicker ng-model="eventForm.closes_at" min-date="minDate" show-weeks="false" class="well well-sm datepicker"></datepicker>
           </div>
         </div>
