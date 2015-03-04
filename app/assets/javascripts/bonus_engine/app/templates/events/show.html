@@ -28,7 +28,7 @@
     <tr>
       <th colspan="2">
         Coworker
-        <input type="text" ng-model="searchText">
+        <input type="text" ng-model="searchText" placeholder="Search a coworker">
       </th>
       <th>Points</th>
       <th></th>
@@ -39,11 +39,11 @@
       <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}"></td>
       <td><a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.receiver.id}}">{{point.receiver.name}}</td>
       <td>
-        <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active">
+        <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active" popover-placement="top" popover-trigger="openTrigger" popover-event popover="{{popoverMessage}}" popover-append-to-body="true">
         <span ng-hide="event.active">{{point.quantity}}</span>
       </td>
       <td class='message'>
-        {{point.message}}
+        <p>{{point.message}}</p>
         </br>
         <a href="#" ng-click="setMessage(point)" ng-show="point.message.length > 0"> Edit</a>
       </td>
