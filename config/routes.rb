@@ -33,7 +33,7 @@ BonusEngine::Engine.routes.draw do
 
   resources :bonus, only: :index
   get 'cycles/:cycle_id/events', to: 'bonus#index'
-  get 'cycles/:cycle_id/events/:id', to: 'bonus#index'
+  get 'cycles/:cycle_id/events/:id', to: 'bonus#index', as: 'cycle_event'
   get 'cycles/:cycle_id/events/:id/me', to: 'bonus#index'
   get 'cycles/:cycle_id/events/:event_id/users/:id', to: 'bonus#index'
 end
