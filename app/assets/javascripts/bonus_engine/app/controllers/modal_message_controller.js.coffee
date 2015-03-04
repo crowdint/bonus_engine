@@ -4,8 +4,6 @@ bonusApp.controller 'modalMessageCtrl', ['$scope', '$modalInstance', 'pointToEdi
   $scope.buttonDisabled = if $scope.message.length >= 20 then false else true
   $scope.eventActive = eventActive
 
-  console.log($scope.eventActive)
-
   $scope.validateMinLength = ->
     if $scope.message.length >= 20
       $scope.buttonDisabled = false

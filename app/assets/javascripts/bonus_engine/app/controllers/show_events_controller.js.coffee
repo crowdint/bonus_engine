@@ -1,7 +1,8 @@
-bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', '$modal', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal) ->
+bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', '$modal', '$timeout', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal, $timeout) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.editingPoint = false;
+  $scope.popoverMessage = 'There was an error assigning points'
 
   $scope.event = Event.get {cycle_id: $scope.cycleId, id: $scope.eventId}
   $scope.points = []
@@ -19,9 +20,9 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
           if point == undefined
             point = new Point({receiver_id: user.id})
             point.quantity = 0
-            point.message = ''
 
           point.receiver = user
+          point.message = ''
 
           $scope.calculateRemainingPoints()
 
@@ -56,11 +57,36 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
   $scope.pointChange = (point) ->
     $scope.calculateRemainingPoints()
     unless $scope.editingPoint
-      if $scope.remainingPoints >= 0 and point.quantity > 0
+      if $scope.pointIsValid(point)
         $scope.setMessage point
       else
-        point.quantity = 0
-        $scope.calculateRemainingPoints()
+        $scope.invalidAssignment(point)
+
+  $scope.pointIsValid = (point) ->
+    $scope.remainingPoints >= 0 and point.quantity > 0 and
+    point.quantity < $scope.remainingPoints and
+    point.quantity < $scope.event.maximum_points and
+    point.quantity > $scope.event.minimum_points
+
+  $scope.invalidAssignment = (point) ->
+    point.oldQuantity = point.quantity
+    point.quantity = 0
+    $scope.calculateRemainingPoints()
+    $scope.triggerPopover(point)
+
+  $scope.triggerPopover = (point) ->
+    $scope.setPopoverMessage(point)
+    point.invalidQty = true
+    $timeout(->
+      point.invalidQty = false
+    , 500)
+
+  $scope.setPopoverMessage = (point) ->
+    if point.oldQuantity > $scope.event.maximum_points or point.oldQuantity < $scope.event.minimum_points
+      $scope.popoverMessage = "You can assign between #{$scope.event.minimum_points} and #{$scope.event.maximum_points} points."
+    else if point.oldQuantity > $scope.remainingPoints
+      $scope.popoverMessage = "You only have #{$scope.remainingPoints} points available."
+
 
   $scope.calculateRemainingPoints =  ->
     $scope.remainingPoints = $scope.event.budget

@@ -4,8 +4,8 @@ window.bonusApp ||= angular.module('BonusApp', [
   'ngRoute',
   'templates',
   'ng-rails-csrf',
-  'ui.bootstrap'
-  ]).config(($routeProvider, $locationProvider, $httpProvider) ->
+  'ui.bootstrap',
+  ]).config(($routeProvider, $locationProvider, $httpProvider, $tooltipProvider) ->
 
     $routeProvider
       .when '/bonus', {
@@ -35,4 +35,5 @@ window.bonusApp ||= angular.module('BonusApp', [
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
 
+    $tooltipProvider.setTriggers({ 'openTrigger': 'closeTrigger' })
 )
