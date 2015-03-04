@@ -21,11 +21,9 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
             point = new Point({receiver_id: user.id})
             point.quantity = 0
 
+          point.lastValidQty = point.quantity
           point.receiver = user
-          point.message = ''
-
           $scope.calculateRemainingPoints()
-
           $scope.points.push point
         )
       )
@@ -70,7 +68,7 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
 
   $scope.invalidAssignment = (point) ->
     point.oldQuantity = point.quantity
-    point.quantity = 0
+    point.quantity = point.lastValidQty
     $scope.calculateRemainingPoints()
     $scope.triggerPopover(point)
 
@@ -95,6 +93,7 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
       $scope.remainingPoints = $scope.remainingPoints - point.quantity
 
   $scope.updatePoints = (point) ->
+    point.lastValidQty = point.quantity
     $scope.calculateRemainingPoints()
     if point.id
       point.$update({cycle_id: $scope.cycleId, event_id: $scope.eventId}, $scope.setUser)
