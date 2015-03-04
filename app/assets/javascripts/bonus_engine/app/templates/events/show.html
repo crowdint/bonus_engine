@@ -37,7 +37,7 @@
   <tbody>
     <tr ng-repeat="point in points | filter:searchText">
       <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}"></td>
-      <td><a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.receiver.id}}">{{point.receiver.name}}</td>
+      <td><a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.receiver.id}}" tabindex="-1">{{point.receiver.name}}</td>
       <td>
         <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active" popover-placement="top" popover-trigger="openTrigger" popover-event popover="{{popoverMessage}}" popover-append-to-body="true">
         <span ng-hide="event.active">{{point.quantity}}</span>
