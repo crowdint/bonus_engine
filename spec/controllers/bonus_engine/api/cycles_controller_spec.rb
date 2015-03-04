@@ -18,9 +18,9 @@ describe BonusEngine::Api::CyclesController do
                                 "msg_required"=>true,
                                 "minimum_points"=>1,
                                 "bonus_engine_user_ids"=>[
-                                  {"id" => 2,"name" => 'Hugo',"email" => nil},
-                                  {"id" => 3,"name" => 'Paco',"email" => nil},
-                                  {"id" => 4,"name" => 'Luis',"email" => nil},
+                                  {"id" => 2,"name" => 'Hugo',"email" => 'hugo@test.com'},
+                                  {"id" => 3,"name" => 'Paco',"email" => 'paco@test.com'},
+                                  {"id" => 4,"name" => 'Luis',"email" => 'luis@test.com'},
                                   {"id" => 1,"name" => 'John',"email" => nil}
                                 ]}
     ] }
