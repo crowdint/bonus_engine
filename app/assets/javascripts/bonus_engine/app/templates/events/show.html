@@ -40,7 +40,7 @@
       </div>
 
       <div class="coworker-message">
-        <textarea ng-model="point.message" ng-show='event.active' class="form-control" tooltip="Tell him/her why earn the points" ng-blur="pointChange(point)" ng-focus="editingMessage(point)"></textarea>
+        <textarea ng-model="point.message" ng-show='event.active' class="form-control" tooltip="Tell him/her why earn the points" ng-blur="pointChange(point)" ng-focus="editingMessage(point)" ng-class="{error: errorOnMessage(point)}"></textarea>
         <p ng-hide='event.active'>{{point.message}}</p>
         <div ng-show='point.editingMessage'>
           {{point.message.length}} of 20 characters required

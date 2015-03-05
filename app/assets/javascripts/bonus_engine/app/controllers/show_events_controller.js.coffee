@@ -52,6 +52,9 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
     $scope.triggerPopover(point)
     point.quantity = point.lastValidQty unless $scope.pointIsValid(point)
 
+  $scope.errorOnMessage = (point) ->
+    !$scope.messageIsValid(point) and $scope.pointIsValid(point)
+
   $scope.triggerPopover = (point) ->
     $scope.setPopoverMessage(point)
     point.invalidQty = true
