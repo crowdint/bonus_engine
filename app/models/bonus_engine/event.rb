@@ -6,7 +6,7 @@ module BonusEngine
     validates_presence_of :name, :opens_at, :closes_at
 
     def stats_for(user)
-      user_points = user.given_points.where(event_id: self.id)
+      user_points = user.given_points.where(event_id: id)
       {
         balance: event_budget - user_points.sum(:quantity),
         pending: event_minimum_people - user_points.count
@@ -18,23 +18,27 @@ module BonusEngine
     end
 
     def event_budget
-      (self.budget || self.cycle.budget) / self.cycle.bonus_engine_users.count
+      (budget || cycle.budget) / cycle.bonus_engine_users.count
     end
 
     def event_minimum_people
-      self.minimum_people || self.cycle.minimum_people
+      minimum_people || cycle.minimum_people
     end
 
     def event_maximum_points
-      self.maximum_points || self.cycle.maximum_points
+      maximum_points || cycle.maximum_points
     end
 
     def event_minimum_points
-      self.minimum_points || self.cycle.minimum_points
+      minimum_points || cycle.minimum_points
     end
 
     def event_msg_required
-      self.msg_required || self.cycle.msg_required
+      msg_required || cycle.msg_required
+    end
+
+    def users_with_money
+      cycle.bonus_engine_users.select{ |u| stats_for(u)[:balance] > 0 }
     end
   end
 end

@@ -8,9 +8,12 @@ FactoryGirl.define do
     msg_required true
 
     after(:create) do  |cycle|
-      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Hugo')
-      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Paco')
-      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Luis')
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Hugo',
+                                        email: 'hugo@test.com')
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Paco',
+                                        email: 'paco@test.com')
+      cycle.bonus_engine_users << create(:bonus_engine_user, name: 'Luis',
+                                        email: 'luis@test.com')
     end
   end
 end
