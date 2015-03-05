@@ -1,4 +1,64 @@
+@import "bootstrap";
+
 .popover.top {
   margin-top: -35px;
   margin-left: -125px;
+}
+
+.coworker-container {
+  @extend .panel;
+  @extend .panel-default;
+  @extend .text-center;
+  padding: 10px;
+  height: 350px;
+
+  &.highlight {
+    background: #eaaaa1;
+    opacity: .6;
+  }
+
+  textarea.form-control {
+    color: #000;
+  }
+
+
+  a {
+    display: block;
+  }
+
+  .coworker-points, .coworker-details, .coworker-message {
+    margin: 0 0 10px 0;
+  }
+
+  img.coworker-picture {
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    border-radius: 150px;
+    margin: 0 0 10px 0;
+  }
+
+  .assigned-successfully {
+    @extend .glyphicon;
+    @extend .glyphicon-ok;
+    font-size: 30px;
+    color: white;
+    background: green;
+    border-radius: 25px;
+    padding: 10px;
+    position: absolute;
+    top: 115px;
+    left: 220px;
+  }
+}
+
+.affix {
+  top: 0;
+  background: rgb(234, 170, 161);
+  width: 100%;
+  color: white;
+  text-shadow: 1px 1px 3px gray;
+  z-index: 10;
+  margin: 0;
+  left: 0;
+  padding: 5px;
 }

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h2>{{event.name}}
+  <h2>{{cycle.name}} >> {{event.name}}
     <small class="pull-right">
       <a href="/cycles/{{cycleId}}/events">Back to list events</a>
       |
@@ -9,44 +9,43 @@
 </div>
 
 
-<ul class="list-inline" data-spy="affix" data-offset-top="280" >
-  <li>
+<div class="row" affix data-spy="affix" data-offset-top="280">
+  <div class="col-md-3">
     <h4>Points to distribute: <em>{{event.budget}}</em></h4>
-
-  </li>
-  <li>
+  </div>
+  <div class="col-md-3">
     <h4>Remaining Points: <em>{{remainingPoints}}</em></h4>
-  </li>
-  <li>
-  <h5>You can assign between <em>{{event.minimum_points}}</em> and <em>{{event.maximum_points}} points.</em></h5>
-  </li>
+  </div>
 
-</ul>
+  <div class="col-md-4">
+    <h5>You can assign between <em>{{event.minimum_points}}</em> and <em>{{event.maximum_points}} points.</em></h5>
+  </div>
+  <div class="col-md-2">
+    <input type="text" ng-model="searchText" placeholder="Search a coworker" class="form-control">
+  </div>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="2">
-        Coworker
-        <input type="text" ng-model="searchText" placeholder="Search a coworker">
-      </th>
-      <th>Points</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="point in points | filter:searchText">
-      <td class="coworker-picture-td"><img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}"></td>
-      <td><a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.receiver.id}}" tabindex="-1">{{point.receiver.name}}</td>
-      <td>
-        <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active" popover-placement="top" popover-trigger="openTrigger" popover-event popover="{{popoverMessage}}" popover-append-to-body="true">
+<div class="row">
+  <div ng-repeat="point in points | filter:searchText" class="col-lg-4">
+    <div class="coworker-container">
+      <div class="coworker-details">
+        <img class="coworker-picture img-circle" ng-src="{{point.receiver.picture_url}}">
+        <span class="assigned-successfully" aria-hidden="true" ng-show="point.saving"></span>
+        <a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.receiver.id}}" tabindex="-1">{{point.receiver.name}}</a>
+      </div>
+
+      <div class="coworker-points">
+        <input type="number" max='{{event.maximum_points}}' min='{{event.minimum_points}}' ng-model="point.quantity" ng-blur="pointChange(point)" ng-show="event.active" popover-placement="top" popover-trigger="openTrigger" popover-event popover="{{popoverMessage}}" popover-append-to-body="true" class="form-control" tooltip="Share with your partner the points you think he/she deserves" tooltip-placement='bottom'>
         <span ng-hide="event.active">{{point.quantity}}</span>
-      </td>
-      <td class='message'>
-        <p>{{point.message}}</p>
-        </br>
-        <a href="#" ng-click="setMessage(point)" ng-show="point.message.length > 0"> Edit</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </div>
+
+      <div class="coworker-message">
+        <textarea ng-model="point.message" ng-show='event.active' class="form-control" tooltip="Tell him/her why earn the points" ng-blur="pointChange(point)" ng-focus="editingMessage(point)"></textarea>
+        <p ng-hide='event.active'>{{point.message}}</p>
+        <div ng-show='point.editingMessage'>
+          {{point.message.length}} of 20 characters required
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

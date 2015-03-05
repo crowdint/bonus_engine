@@ -1,6 +1,6 @@
 <div class="page-header">
   <h2>
-    {{event.name}}
+    {{cycle.name}} >> {{event.name}}
     <small>
       <a href="/cycles/{{cycleId}}/events/{{eventId}}" class="pull-right">Back to event</a>
     </small>
@@ -17,20 +17,22 @@
   </li>
 </ul>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th colspan="2">Coworker</th>
-      <th>Points received</th>
-      <th>Message</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="point in points">
-      <td><img class="coworker-picture" ng-src="{{point.giver.picture_url}}"></td>
-      <td>{{point.giver.name}}</td>
-      <td>{{point.quantity}}</td>
-      <td>{{point.message}}</td>
-    </tr>
-  </tbody>
-</table>
+
+<div class="row">
+  <div ng-repeat="point in points" class="col-lg-4">
+    <div class="coworker-container">
+      <div class="coworker-details">
+        <img class="coworker-picture img-circle" ng-src="{{point.giver.picture_url}}">
+        <a href="/cycles/{{cycleId}}/events/{{eventId}}/users/{{point.giver.id}}" tabindex="-1">{{point.giver.name}}</a>
+      </div>
+
+      <div class="coworker-points">
+        <span>{{point.quantity}}</span>
+      </div>
+
+      <div class="coworker-message">
+        <p>{{point.message}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,5 @@ bonusApp.controller 'eventsCtrl', ['$scope', '$routeParams', '$location', 'Event
     angular.forEach($scope.events, (event) ->
       event.info.distributedPoints = event.budget - event.info.balance
     )
-
   )
 ]

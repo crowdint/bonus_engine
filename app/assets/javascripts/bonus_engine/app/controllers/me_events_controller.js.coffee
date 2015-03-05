@@ -1,7 +1,8 @@
-bonusApp.controller 'meEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', ($scope, $routeParams, $location, Event, User, Point, $filter) ->
+bonusApp.controller 'meEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', 'Cycle', ($scope, $routeParams, $location, Event, User, Point, $filter, Cycle) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.event = Event.get {cycle_id: $scope.cycleId, id: $scope.eventId}
+  $scope.cycle = Cycle.get {id: $scope.cycleId}
 
   $scope.points = []
   $scope.totalPoints = 0

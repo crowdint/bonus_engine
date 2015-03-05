@@ -1,10 +1,11 @@
-bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', '$modal', '$timeout', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal, $timeout) ->
+bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'Event', 'User', 'Point', '$filter', '$modal', '$timeout', 'Cycle', ($scope, $routeParams, $location, Event, User, Point, $filter, $modal, $timeout, Cycle) ->
   $scope.cycleId = $routeParams.cycle_id
   $scope.eventId = $routeParams.event_id
   $scope.editingPoint = false;
   $scope.popoverMessage = 'There was an error assigning points'
 
   $scope.event = Event.get {cycle_id: $scope.cycleId, id: $scope.eventId}
+  $scope.cycle = Cycle.get {id: $scope.cycleId}
   $scope.points = []
 
   User.get({cycle_id: $scope.cycleId, id: 'me'}, (user) ->
@@ -18,58 +19,39 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
           point = points[0]
 
           if point == undefined
-            point = new Point({receiver_id: user.id})
-            point.quantity = 0
+            point = new Point({receiver_id: user.id, quantity: 0, message: ''})
 
           point.lastValidQty = point.quantity
+          point.lastValidMsg = point.message
           point.receiver = user
-          $scope.calculateRemainingPoints()
           $scope.points.push point
+          $scope.remainingPoints = $scope.calculateRemainingPoints()
         )
       )
     )
   )
 
-
-  $scope.setMessage = (point) ->
-    $scope.editingPoint = true
-
-    modalInstance = $modal.open
-      templateUrl: 'bonus_engine/app/templates/events/modal_message.html'
-      controller: 'modalMessageCtrl'
-      size: null
-      backdrop: !$scope.event.active
-      keyboard: !$scope.event.active
-      resolve:
-        pointToEdit: ->
-          point
-        eventActive: ->
-          $scope.event.active
-
-    modalInstance.result.then (message) ->
-      if $scope.event.active
-        point.message = message
-        $scope.updatePoints(point)
-      $scope.editingPoint = false
-
   $scope.pointChange = (point) ->
-    $scope.calculateRemainingPoints()
-    unless $scope.editingPoint
-      if $scope.pointIsValid(point)
-        $scope.setMessage point
+    point.editingMessage = false
+    if $scope.pointIsChanged(point)
+      if $scope.pointIsValid(point) && $scope.messageIsValid(point)
+        $scope.updatePoints point
       else
         $scope.invalidAssignment(point)
 
   $scope.pointIsValid = (point) ->
     $scope.remainingPoints >= 0 and point.quantity > 0 and
-    point.quantity < $scope.remainingPoints and
-    point.quantity < $scope.event.maximum_points and
-    point.quantity > $scope.event.minimum_points
+    point.quantity <= $scope.remainingPoints and
+    point.quantity <= $scope.event.maximum_points and
+    point.quantity >= $scope.event.minimum_points
+
+  $scope.messageIsValid = (point) ->
+    point.message != undefined and point.message.length >= 20
 
   $scope.invalidAssignment = (point) ->
-    point.oldQuantity = point.quantity
-    point.quantity = point.lastValidQty
-    $scope.calculateRemainingPoints()
+    if !$scope.pointIsValid(point)
+      point.oldQuantity = point.quantity
+      point.quantity = point.lastValidQty
     $scope.triggerPopover(point)
 
   $scope.triggerPopover = (point) ->
@@ -84,22 +66,44 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
       $scope.popoverMessage = "You can assign between #{$scope.event.minimum_points} and #{$scope.event.maximum_points} points."
     else if point.oldQuantity > $scope.remainingPoints
       $scope.popoverMessage = "You only have #{$scope.remainingPoints} points available."
+    else if !$scope.messageIsValid(point)
+      $scope.popoverMessage = "Please, share with your coworker why he/she earn your points."
 
 
   $scope.calculateRemainingPoints =  ->
-    $scope.remainingPoints = $scope.event.budget
+    remainingPoints = $scope.event.budget
     angular.forEach $scope.points, (point) ->
       point.quantity = 0 if point.quantity == undefined
-      $scope.remainingPoints = $scope.remainingPoints - point.quantity
+      remainingPoints = remainingPoints - point.quantity
+    remainingPoints
 
   $scope.updatePoints = (point) ->
+    $scope.remainingPoints = $scope.calculateRemainingPoints()
     point.lastValidQty = point.quantity
-    $scope.calculateRemainingPoints()
+    point.lastValidMsg = point.message
     if point.id
-      point.$update({cycle_id: $scope.cycleId, event_id: $scope.eventId}, $scope.setUser)
+      point.$update({cycle_id: $scope.cycleId, event_id: $scope.eventId}, $scope.afterSave)
     else
-      point.$save({cycle_id: $scope.cycleId, event_id: $scope.eventId}, $scope.setUser)
+      point.$save({cycle_id: $scope.cycleId, event_id: $scope.eventId}, $scope.afterSave)
 
-  $scope.setUser = (point) ->
+  $scope.afterSave = (point) ->
+    point.lastValidQty = point.quantity
+    point.lastValidMsg = point.message
     point.receiver = $filter('filter')($scope.users, {id: point.receiver_id})[0];
+    $scope.pointSuccessfullySaved(point)
+
+  $scope.editingMessage = (point) ->
+    point.message = '' if point.message == undefined
+    point.editingMessage = true
+
+  $scope.pointIsChanged = (point) ->
+    point.lastValidQty != point.quantity or
+    point.lastValidMsg != point.message
+
+  $scope.pointSuccessfullySaved = (point) ->
+    point.saving = true
+    $timeout( ->
+      point.saving = false
+    , 1000)
+
 ]
