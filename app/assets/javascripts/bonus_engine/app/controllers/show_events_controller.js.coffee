@@ -21,7 +21,7 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
           if point == undefined
             point = new Point({receiver_id: user.id, quantity: 0, message: ''})
 
-          point.lastValidQty = point.quantity
+          point.lastValidQty = point.quantity || 0
           point.lastValidMsg = point.message
           point.receiver = user
           $scope.points.push point
@@ -49,10 +49,8 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
     point.message != undefined and point.message.length >= 20
 
   $scope.invalidAssignment = (point) ->
-    if !$scope.pointIsValid(point)
-      point.oldQuantity = point.quantity
-      point.quantity = point.lastValidQty
     $scope.triggerPopover(point)
+    point.quantity = point.lastValidQty unless $scope.pointIsValid(point)
 
   $scope.triggerPopover = (point) ->
     $scope.setPopoverMessage(point)
@@ -62,13 +60,12 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
     , 500)
 
   $scope.setPopoverMessage = (point) ->
-    if point.oldQuantity > $scope.event.maximum_points or point.oldQuantity < $scope.event.minimum_points
-      $scope.popoverMessage = "You can assign between #{$scope.event.minimum_points} and #{$scope.event.maximum_points} points."
-    else if point.oldQuantity > $scope.remainingPoints
-      $scope.popoverMessage = "You only have #{$scope.remainingPoints} points available."
-    else if !$scope.messageIsValid(point)
+    if !$scope.messageIsValid(point) and $scope.pointIsValid(point)
       $scope.popoverMessage = "Please, share with your coworker why he/she earn your points."
-
+    else if point.quantity > $scope.remainingPoints
+      $scope.popoverMessage = "You only have #{$scope.remainingPoints} points available."
+    else if point.quantity > $scope.event.maximum_points or point.quantity < $scope.event.minimum_points or point.quantity == undefined
+      $scope.popoverMessage = "You can assign between #{$scope.event.minimum_points} and #{$scope.event.maximum_points} points."
 
   $scope.calculateRemainingPoints =  ->
     remainingPoints = $scope.event.budget
