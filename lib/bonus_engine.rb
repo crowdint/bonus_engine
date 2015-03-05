@@ -2,7 +2,8 @@ require "bonus_engine/engine"
 require "bonus_engine/exceptions"
 require "services/user_service"
 require "services/authorization_service"
-require "services/budget_service"
+require "services/bonus_engine/budget_service"
+require "services/bonus_engine/mailer_service"
 require 'angularjs-rails'
 require 'angular-rails-templates'
 require 'ng-rails-csrf'

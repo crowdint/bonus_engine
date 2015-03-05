@@ -71,7 +71,7 @@ module BonusEngine
       end
 
       def budget_service
-        ::BudgetService.new current_event, current_engine_user
+        BonusEngine::BudgetService.new current_event, current_engine_user
       end
 
       def event
