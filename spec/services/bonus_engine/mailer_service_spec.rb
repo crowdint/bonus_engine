@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe MailerService do
+describe BonusEngine::MailerService do
   let(:cycle){ create :cycle }
   let(:event){ create :event }
   before do
     cycle.events << event
-    expect(BonusEngine::EventInviteMailer).to receive(:event_invite)
+    BonusEngine::EventInviteMailer.should_receive(:event_invite).and_return( double("Mailer", deliver: true) )
   end
   describe '#mail_active_events' do
     it 'calls event invite mailer for active events' do
-      MailerService.mail_active_events
+      BonusEngine::MailerService.mail_active_events
     end
   end
 end
