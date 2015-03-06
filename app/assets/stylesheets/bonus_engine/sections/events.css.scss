@@ -1,14 +1,9 @@
-@import "bootstrap";
-
 .popover.top {
   margin-top: -35px;
   margin-left: -125px;
 }
 
 .coworker-container {
-  @extend .panel;
-  @extend .panel-default;
-  @extend .text-center;
   padding: 10px;
   height: 350px;
 
@@ -17,7 +12,7 @@
     opacity: .6;
   }
 
-  textarea.form-control {
+  textarea.form-control, input.form-control {
     color: #000;
   }
 
@@ -38,8 +33,6 @@
   }
 
   .assigned-successfully {
-    @extend .glyphicon;
-    @extend .glyphicon-ok;
     font-size: 30px;
     color: white;
     background: green;
