@@ -3,7 +3,7 @@ module BonusEngine
     def show_active_bonus_events
       event_list = ""
       active_user_events.each do |event|
-        event_link = link_to event.name, "/cycles/#{event.cycle_id}/events/#{event.id}"
+        event_link = link_to "#{event.cycle.name} - #{event.name}", "/cycles/#{event.cycle_id}/events/#{event.id}"
         event_list.concat content_tag( :li, event_link)
       end
       event_list.html_safe
