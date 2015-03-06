@@ -40,8 +40,9 @@ bonusApp.controller 'showEventsCtrl', ['$scope', '$routeParams', '$location', 'E
         $scope.invalidAssignment(point)
 
   $scope.pointIsValid = (point) ->
-    $scope.remainingPoints >= 0 and point.quantity > 0 and
-    point.quantity <= $scope.remainingPoints and
+    (($scope.remainingPoints >= 0 and point.quantity > 0 and
+    point.quantity <= $scope.remainingPoints) or
+    ($scope.remainingPoints == 0 and point.quantity < point.lastValidQty)) and
     point.quantity <= $scope.event.maximum_points and
     point.quantity >= $scope.event.minimum_points
 
